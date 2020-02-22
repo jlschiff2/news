@@ -28,7 +28,7 @@ get "/news" do
     #conditions = forecast["currently"]["summary"]
 
     # display current weather
-    puts "In #{q}, it is currently #{current_temperature} and #{conditions}."
+    #puts "In #{q}, it is currently #{current_temperature} and #{conditions}."
 
     # display weather forecast
     #for day in forecast["daily"]["data"]
