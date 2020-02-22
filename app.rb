@@ -1,13 +1,13 @@
 require "sinatra"
 require "sinatra/reloader"
 require "geocoder"
-#require "forecast_io"
-#require "httparty"
+require "forecast_io"
+require "httparty"
 def view(template); erb template.to_sym; end
 before { puts "Parameters: #{params}" }  
 
 # enter your Dark Sky API key here
-# ForecastIO.api_key = "6db4f62deb242d6ae74da3d760af00d6"
+ForecastIO.api_key = "6db4f62deb242d6ae74da3d760af00d6"
 
 get "/" do
     view "app"
@@ -16,31 +16,31 @@ end
 get "/news" do
     # turn city into lat-long coordinates
     results = Geocoder.search(params["q"])
-    lat_long = results.first.coordinates #=> [lat, long]
-    @lat = "#{lat_long[0]}"
-    @long = "#{lat_long[1]}"
-    puts "#{@lat} #{@long}"
+    @location = params["q"]
+    @lat_long = results.first.coordinates #=> [lat, long]
+    @lat = "#{@lat_long[0]}"
+    @long = "#{@lat_long[1]}"
+    view "app_news"
     
     # send lat-long to Dark Sky to retrieve weather
-    forecast = ForecastIO.forecast("#{lat}", "#{long}").to_hash
-    current_temperature = forecast["currently"]["temperature"]
-    conditions = forecast["currently"]["summary"]
+    #forecast = ForecastIO.forecast("#{@lat}, #{@long}").to_hash
+    #current_temperature = forecast["currently"]["temperature"]
+    #conditions = forecast["currently"]["summary"]
 
     # display current weather
     puts "In #{q}, it is currently #{current_temperature} and #{conditions}."
 
     # display weather forecast
-    for day in forecast["daily"]["data"]
-    puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}"
-    end
+    #for day in forecast["daily"]["data"]
+    #puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}"
+    #end
 
     # display national headlines
-    @location = params["q"]
-    @geocoder_results = Geocoder.search(@location)
-    @lat_long = @geocoder_results.first.coordinates # => [lat, long] array
-    @url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
-    news = HTTParty.get(@url).parsed_response.to_hash    
-    pp news
+    #@geocoder_results = Geocoder.search(@location)
+    #@lat_long = @geocoder_results.first.coordinates # => [lat, long] array
+    #@url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
+    #news = HTTParty.get(@url).parsed_response.to_hash    
+    #pp news
 end
 
 
