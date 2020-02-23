@@ -1,0 +1,23 @@
+h1 {
+    color: lightgrey;
+    font-family: 'Roboto', sans-serif;
+    font-size: larger;
+}
+
+h2 {
+    color: slategrey;
+    font-family: 'Roboto', sans-serif;
+    font-size: xx-large;
+}
+
+h3 {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: x-large;
+}
+
+p {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 32px;
+}

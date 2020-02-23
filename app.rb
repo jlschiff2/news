@@ -17,30 +17,40 @@ get "/news" do
     # turn city into lat-long coordinates
     results = Geocoder.search(params["q"])
     @location = params["q"]
-    @lat_long = results.first.coordinates #=> [lat, long]
-    @lat = "#{@lat_long[0]}"
-    @long = "#{@lat_long[1]}"
-    view "app_news"
+    lat_long = results.first.coordinates #=> [lat, long]
+    lat = "#{lat_long[0]}"
+    long = "#{lat_long[1]}"
     
     # send lat-long to Dark Sky to retrieve weather
-    #forecast = ForecastIO.forecast("#{@lat}, #{@long}").to_hash
-    #current_temperature = forecast["currently"]["temperature"]
-    #conditions = forecast["currently"]["summary"]
+    forecast = ForecastIO.forecast("#{lat}","#{long}").to_hash
+    @current_temperature = forecast["currently"]["temperature"]
+    @current_conditions = forecast["currently"]["summary"]
 
     # display current weather
-    #puts "In #{q}, it is currently #{current_temperature} and #{conditions}."
+    puts "In #{@location}, it is currently #{@current_temperature} and #{@current_conditions}."
 
     # display weather forecast
+    # day_hightemp = []
+    # day_condition = []
     #for day in forecast["daily"]["data"]
-    #puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}"
-    #end
+        # day_hightemp << "#{day["temperatureHigh"]}"
+        # day_condition << "#{day["summary"]}"
+        # puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}"
+    # end
+    
+    # @list = day_hightemp, day_condition
 
     # display national headlines
-    #@geocoder_results = Geocoder.search(@location)
-    #@lat_long = @geocoder_results.first.coordinates # => [lat, long] array
-    #@url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
-    #news = HTTParty.get(@url).parsed_response.to_hash    
-    #pp news
+    # geocoder_results = Geocoder.search(@location)
+    #news_lat_long = @geocoder_results.first.coordinates # => [lat, long] array
+    #url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
+    #news = HTTParty.get(url).parsed_response.to_hash 
+    
+    #@article_source = news["source"]["name"]
+    #@article_title = news["title"]
+    #@article_url = news["url"]
+
+    view "app_news"
 end
 
 

@@ -18,15 +18,31 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>News</title>
+    <title>Local Newspaper</title>
   </head>
   <body>
-
-    <div class="container mt-5">
-      <h1>
-      Here is the weather for <%= @location %>.
-      </h1>
-        <p><%=@lat_long%></p>
+    #<!--title bar-->
+    <div class="container">
+        <div class="row"> 
+            <div class="col-md-12">
+                <h1>Local Newspaper</h1>
+                <h2> <%= @location %> </h2>
+            </div>
+        </div>    
+    #<!--newspaper sections-->
+        <div class="row"> 
+            #<!--news-->
+            <div class="col-md-8">
+                <h2> Top national headlines </h2>
+            </div>
+            #<!--weather-->
+            <div class="col-md-4">
+                <h2> Local weather </h2>
+                    <h3>Current weather</h3>
+                        <p> In <%= @location %>, it is currently <%= @current_temperature %> degrees and <%= @current_conditions %>. </p>
+                    <h3>Weekly forecast</h3>
+            </div>
+        </div>  
     </div>
 
     <!-- Optional JavaScript -->
