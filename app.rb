@@ -30,25 +30,34 @@ get "/news" do
     puts "In #{@location}, it is currently #{@current_temperature} and #{@current_conditions}."
 
     # display weather forecast
-    # day_hightemp = []
-    # day_condition = []
-    #for day in forecast["daily"]["data"]
-        # day_hightemp << "#{day["temperatureHigh"]}"
-        # day_condition << "#{day["summary"]}"
-        # puts "A high temperature of #{day["temperatureHigh"]} and #{day["summary"]}"
-    # end
+    @day = forecast["daily"]["data"]
+    # @day_number = forecast["daily"]["data"][0]["time"]
     
-    # @list = day_hightemp, day_condition
+    
+    #day_hightemp = []
+    #day_condition = []
+
+    #for day in 
+    #    day_hightemp << "#{day["temperatureHigh"]}"
+    #    day_condition << "#{day["summary"]}"
+    #   puts "On #{@day_name}, it will be #{day["summary"]} with a high of #{day["temperatureHigh"]}."
+    # end
+        
 
     # display national headlines
     # geocoder_results = Geocoder.search(@location)
-    #news_lat_long = @geocoder_results.first.coordinates # => [lat, long] array
     #url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
     #news = HTTParty.get(url).parsed_response.to_hash 
     
-    #@article_source = news["source"]["name"]
-    #@article_title = news["title"]
-    #@article_url = news["url"]
+    #article_title = []
+    #article_url = [] 
+
+    #for each in news
+    #    article_title << news["title"]
+    #    article_url << news["url"]
+    #end
+
+    #@top_articles = article_title, article_url
 
     view "app_news"
 end

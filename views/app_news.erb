@@ -38,9 +38,17 @@
             #<!--weather-->
             <div class="col-md-4">
                 <h2> Local weather </h2>
-                    <h3>Current weather</h3>
-                        <p> In <%= @location %>, it is currently <%= @current_temperature %> degrees and <%= @current_conditions %>. </p>
-                    <h3>Weekly forecast</h3>
+                <h3>Current weather</h3>
+                    <p> In <%= @location %>, it is currently <%= @current_temperature %> degrees and <%= @current_conditions %>. </p>
+                <h3>Weekly forecast</h3>
+                    <ul>
+                        <% for item in @day %>
+                        <li> <%= item["time"] %> </li>
+                        <li> <%= item["temperatureHigh"] %> </li>
+                        <li> <%= item["summary"] %> </li>
+                        <% end %>
+                    </ul>
+                    
             </div>
         </div>  
     </div>
