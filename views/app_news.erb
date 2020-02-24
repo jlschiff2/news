@@ -68,8 +68,9 @@
                     <% for item in @day %> 
                         <p> <%= Time.at(item["time"]).strftime("%a") %>: <%= item["temperatureHigh"] %> degrees and <%= item["summary"] %> </p>
                     <% end %>
-
-                    
+                <p>
+                    <a href="/" class="btn btn-outline-secondary">Go Back</a>
+                </p>
             </div>
 
             <div class="col-md-4">
