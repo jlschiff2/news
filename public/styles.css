@@ -4,6 +4,11 @@ h1 {
     font-size: larger;
 }
 
+.display-4 {
+    color: black;
+    font-size: 48px;
+}
+
 h2 {
     color: slategrey;
     font-family: 'Roboto', sans-serif;
@@ -16,8 +21,18 @@ h3 {
     font-size: x-large;
 }
 
+h4 {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
 p {
     color: black;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 12px;
+    font-size: 16px;
+}
+
+img {
+    width: 300px;
 }

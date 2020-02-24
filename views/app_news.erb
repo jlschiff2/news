@@ -21,34 +21,63 @@
     <title>Local Newspaper</title>
   </head>
   <body>
-    #<!--title bar-->
-    <div class="container">
+    
+    <div class="container mt-5">
         <div class="row"> 
             <div class="col-md-12">
                 <h1>Local Newspaper</h1>
-                <h2> <%= @location %> </h2>
+                <h2> Your newspaper for: <%= @location %> </h2>
             </div>
         </div>    
-    #<!--newspaper sections-->
+    
         <div class="row"> 
-            #<!--news-->
-            <div class="col-md-8">
-                <h2> Top national headlines </h2>
-            </div>
-            #<!--weather-->
-            <div class="col-md-4">
-                <h2> Local weather </h2>
-                <h3>Current weather</h3>
-                    <p> In <%= @location %>, it is currently <%= @current_temperature %> degrees and <%= @current_conditions %>. </p>
-                <h3>Weekly forecast</h3>
-                    <ul>
-                        <% for item in @day %>
-                        <li> <%= item["time"] %> </li>
-                        <li> <%= item["temperatureHigh"] %> </li>
-                        <li> <%= item["summary"] %> </li>
-                        <% end %>
-                    </ul>
+            <p></p>
+             <div class="col-md-8">
+                <p></p>
+                <div class="jumbotron">
+                    <% if @current_icon == "clear-day" %>
+                        <i class="fas fa-sun"></i>
+                    <% elsif @current_icon == "clear-night" %>
+                        <i class="fas fa-moon"></i>
+                    <% elsif @current_icon == "partly-cloudy-day" %>
+                        <i class="fas fa-cloud-sun"></i>
+                    <% elsif @current_icon == "partly-cloudy-night" %>
+                        <i class="fas fa-cloud-night"></i>
+                    <% elsif @current_icon == "cloudy" %>
+                        <i class="fas fa-cloud"></i>
+                    <% elsif @current_icon == "rain" %>
+                        <i class="fas fa-cloud-rain"></i>
+                    <% elsif @current_icon == "sleet" %>
+                        <i class="fas fa-cloud-sleet"></i>
+                    <% elsif @current_icon == "snow" %>
+                        <i class="fas fa-cloud-snow"></i>
+                    <% elsif @current_icon == "wind" %>
+                        <i class="fas fa-wind"></i>
+                    <% elsif @current_icon == "fog" %>
+                        <i class="fal fa-fog"></i>
+                    <% else %>
+                        img not found
+                    <% end %>  
                     
+                    <h1 class="display-4">
+                    In <%= @location %>, it is currently <%= @current_temperature %> degrees and <%= @current_conditions %>.</h1>
+                </div>
+                    <p></p>
+
+                <h4><em>Forecast for this week</em></h4>
+                    <% for item in @day %> 
+                        <p> <%= Time.at(item["time"]).strftime("%a") %>: <%= item["temperatureHigh"] %> degrees and <%= item["summary"] %> </p>
+                    <% end %>
+
+                    
+            </div>
+
+            <div class="col-md-4">
+                <h3> Top national headlines </h3>
+                <% for article in @top_articles %>
+                <p> <img src= "<%= article["urlToImage"] %>" </img> </p>
+                <p> <a href= "<%= article["url"] %>"> <%= article["title"] %> </a> </p>
+                <% end %>
             </div>
         </div>  
     </div>

@@ -25,39 +25,22 @@ get "/news" do
     forecast = ForecastIO.forecast("#{lat}","#{long}").to_hash
     @current_temperature = forecast["currently"]["temperature"]
     @current_conditions = forecast["currently"]["summary"]
+    @current_icon = forecast["currently"]["icon"]
 
     # display current weather
     puts "In #{@location}, it is currently #{@current_temperature} and #{@current_conditions}."
 
     # display weather forecast
     @day = forecast["daily"]["data"]
-    # @day_number = forecast["daily"]["data"][0]["time"]
-    
-    
-    #day_hightemp = []
-    #day_condition = []
-
-    #for day in 
-    #    day_hightemp << "#{day["temperatureHigh"]}"
-    #    day_condition << "#{day["summary"]}"
-    #   puts "On #{@day_name}, it will be #{day["summary"]} with a high of #{day["temperatureHigh"]}."
-    # end
+    for object in @day
+    puts "It will be #{object["summary"]} with a high of #{object["temperatureHigh"]}."
+    end
         
-
     # display national headlines
-    # geocoder_results = Geocoder.search(@location)
-    #url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
-    #news = HTTParty.get(url).parsed_response.to_hash 
-    
-    #article_title = []
-    #article_url = [] 
-
-    #for each in news
-    #    article_title << news["title"]
-    #    article_url << news["url"]
-    #end
-
-    #@top_articles = article_title, article_url
+    geocoder_results = Geocoder.search(@location)
+    url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=4bd84eb679e949d597951ba41ca8d754"
+    news = HTTParty.get(url).parsed_response.to_hash 
+    @top_articles = news["articles"]
 
     view "app_news"
 end
@@ -76,10 +59,7 @@ end
    # @lat_long = results.first.coordinates => [lat,long]
     #"#{@lat_long[0]} #{@lat_long[1]}"
 
-    #current_temp = forecast["currently"]["temperature"]
-    #current_condition = forecast["currently"]["summary"]
-        #puts "In #{forecast["timezone"]}, it is currently #{current_temp} degrees and #{current_condition}"
-
+   
 # a loop gets built on an array, not a hash!
 # variable made for what the array is, then you can use that to locate the data you need.
 
